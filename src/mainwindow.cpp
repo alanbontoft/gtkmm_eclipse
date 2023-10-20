@@ -41,6 +41,8 @@ void MainWindow::on_btn_reset_click()
         _total = 0;
         show_message();
     }
+
+    StartThread();
 }
 
 void MainWindow::on_btn_toggle_click()
@@ -58,6 +60,26 @@ void MainWindow::show_message()
     cout << _msg << endl;
 
     _messageLabel->set_text(_msg);
+}
+
+void* thread_function(void *param)
+{
+	int id = *(int*)param;
+
+	while(true)
+	{
+		cout << "Thread " << id << " running" << endl;
+		sleep(1);
+	}
+
+	return nullptr; // NULL;
+}
+
+void MainWindow::StartThread()
+{
+	_threadCounter++;
+	Glib::ustring s = Glib::ustring::sprintf("Thread %d", _threadCounter);
+	_thread = g_thread_new(s.c_str(), thread_function, &_threadCounter);
 }
 
 /*

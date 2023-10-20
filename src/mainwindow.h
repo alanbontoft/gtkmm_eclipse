@@ -5,6 +5,8 @@ class MainWindow : public Gtk::Window
 public:    
     MainWindow();
 
+    void StartThread();
+
 private:
     void on_btn_increase_click();
     void on_btn_decrease_click();
@@ -14,6 +16,9 @@ private:
     
     int _total = 0;
     Glib::ustring _msg;
+
+    GThread *_thread;
+    int _threadCounter = 0;
 
     void initWindow();
 
