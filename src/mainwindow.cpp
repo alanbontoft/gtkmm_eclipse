@@ -65,11 +65,12 @@ void MainWindow::show_message()
 void* thread_function(void *param)
 {
 	int id = *(int*)param;
+	int count = 0;
 
-	while(true)
+	while(count < 10)
 	{
-		cout << "Thread " << id << " running" << endl;
-		sleep(1);
+		cout << "Thread " << id << " = " << count++ << endl;
+		sleep(id);
 	}
 
 	return nullptr; // NULL;
